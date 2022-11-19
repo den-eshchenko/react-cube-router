@@ -19,7 +19,7 @@ export function Auth() {
     useEffect(() => {
         const side = params.side;
         if (!side) {
-            navigateWithSearchParams('/front_side')
+            navigateWithSearchParams('/front_side', 45)
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
