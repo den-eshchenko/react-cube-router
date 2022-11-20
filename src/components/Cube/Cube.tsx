@@ -41,6 +41,7 @@ export const CubeRouting = () => {
     const side = params.side || '';
     
     if (event.target === containerRef.current && event.propertyName === "font-size") {
+      console.log('handleTransitionEnd containerRef', event);
       setSearchParams({ previousSide: side });
       setRotationStyleProperty(`/${side}`);
     }
