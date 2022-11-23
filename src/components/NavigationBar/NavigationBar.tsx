@@ -1,3 +1,5 @@
+import { HomeOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import { useNavigateWithSearchParams } from "../../hooks/useNavigateWithSearchParams";
 
 export const NavigationBar = () => {
@@ -9,57 +11,66 @@ export const NavigationBar = () => {
   };
 
   return (
-    <div style={{ fontSize: '100%' }}>
-      <button
+    <>
+      <Button
+          style={{ fontSize: '100%' }}
+          onClick={() => {
+            handleChangeSide('/front_side');
+          }}
+        >
+          <HomeOutlined />
+          home
+        </Button>
+      <Button
         style={{ fontSize: '100%' }}
         onClick={() => {
-            // при клике меняется url на /back_side, сохраняется текущее положение отрисованным,
-            // начинается анимация перехода, после анимации меняется previousSide на текущий url
-            handleChangeSide('/back_side');
+          // при клике меняется url на /back_side, сохраняется текущее положение отрисованным,
+          // начинается анимация перехода, после анимации меняется previousSide на текущий url
+          handleChangeSide('/back_side');
         }}
       >
         back_side
-      </button>
-      <button
+      </Button>
+      <Button
         style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/front_side');
         }}
       >
         front_side
-      </button>
-      <button
+      </Button>
+      <Button
         style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/left_side');
         }}
       >
         left_side
-      </button>
-      <button
+      </Button>
+      <Button
         style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/right_side');
         }}
       >
         right_side
-      </button>
-      <button
+      </Button>
+      <Button
         style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/top_side');
         }}
       >
         top_side
-      </button>
-      <button
+      </Button>
+      <Button
         style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/bottom_side');
         }}
       >
         bottom_side
-      </button>
-    </div>
+      </Button>
+    </>
   );
 };

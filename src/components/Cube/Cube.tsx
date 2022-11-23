@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
+import { SideLayout } from '../SideLayout/SideLayout';
 
 import styles from './Cube.module.css';
 
@@ -38,14 +39,16 @@ export const CubeRouting = () => {
 
 
   const handleTransitionEnd = useCallback((event: TransitionEvent) => {
+    event.stopPropagation();
+    event.stopImmediatePropagation();
     const side = params.side || '';
     
+    // срабатывает по 2 раза - возможно можно чекать что уже стоит в значениях
     if (event.target === containerRef.current && event.propertyName === "font-size") {
-      console.log('handleTransitionEnd containerRef', event);
       setSearchParams({ previousSide: side });
       setRotationStyleProperty(`/${side}`);
     }
-    if (event.target === cubeRef.current) {
+    if (event.target === cubeRef.current && event.propertyName === "font-size") {
       setSizeStyleProperty(45);
     }
   }, [params.side, setSearchParams]);
@@ -75,40 +78,52 @@ export const CubeRouting = () => {
         <div ref={containerRef} className={styles.container}>
           <div ref={cubeRef} className={`${styles.cube} ${styles.current_side}`}>
             <div ref={frontRef} className={`${styles.side} ${styles.front}`}>
-              <div style={{ fontSize: '30%' }}>
-                <NavigationBar />
-                front
-              </div>
+              <SideLayout
+                navigationComponent={<NavigationBar />}
+                headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<div>Божественный контент front стороны</div>}
+                footerComponent={<div>Классный подвал</div>}
+              />
             </div>
             <div ref={backRef} className={`${styles.side} ${styles.back}`}>
-              <div style={{ fontSize: '30%' }}>
-                <NavigationBar />
-                back
-              </div>
+              <SideLayout
+                navigationComponent={<NavigationBar />}
+                headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<div>Божественный контент back стороны</div>}
+                footerComponent={<div>Классный подвал</div>}
+              />
             </div>
             <div ref={rightRef} className={`${styles.side} ${styles.right}`}>
-              <div style={{ fontSize: '30%' }}>
-                <NavigationBar />
-                right
-            </div>
+              <SideLayout
+                navigationComponent={<NavigationBar />}
+                headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<div>Божественный контент right стороны</div>}
+                footerComponent={<div>Классный подвал</div>}
+              />
             </div>
             <div ref={leftRef} className={`${styles.side} ${styles.left}`}>
-              <div style={{ fontSize: '30%' }}>
-                <NavigationBar />
-                left
-              </div>
+              <SideLayout
+                navigationComponent={<NavigationBar />}
+                headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<div>Божественный контент left стороны</div>}
+                footerComponent={<div>Классный подвал</div>}
+              />
             </div>
             <div ref={topRef} className={`${styles.side} ${styles.top}`}>
-              <div style={{ fontSize: '30%' }}>
-                <NavigationBar />
-                top
-              </div>
+              <SideLayout
+                navigationComponent={<NavigationBar />}
+                headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<div>Божественный контент top стороны</div>}
+                footerComponent={<div>Классный подвал</div>}
+              />
             </div>
             <div ref={bottomRef} className={`${styles.side} ${styles.bottom}`}>
-              <div style={{ fontSize: '30%' }}>
-                <NavigationBar />
-                bottom
-              </div>
+              <SideLayout
+                navigationComponent={<NavigationBar />}
+                headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<div>Божественный контент bottom стороны</div>}
+                footerComponent={<div>Классный подвал</div>}
+              />
             </div>
           </div>
         </div>

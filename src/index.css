@@ -36,3 +36,9 @@ code {
 .width100 {
   width: 100%;
 }
+
+.ant-btn {
+  height: 2em;
+  padding: .1em .1em;
+  border-radius: .5em;
+}

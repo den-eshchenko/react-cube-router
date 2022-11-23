@@ -1,0 +1,45 @@
+.main_container {
+  font-size: 30%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.navigation_container {
+  font-size: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1em;
+}
+
+.content_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 4;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 4;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
