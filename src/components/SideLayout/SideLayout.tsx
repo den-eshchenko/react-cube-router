@@ -12,20 +12,19 @@ type SideLayoutProps = {
 export const SideLayout: FC<SideLayoutProps> = ({ navigationComponent, headerComponent, contentComponent, footerComponent }) => {
   const mainContainerElement = useRef<HTMLDivElement>(null);
 
-  const handleTransitionStart = useCallback((event: TransitionEvent) => {
+  const handleTransitionEnd = useCallback((event: TransitionEvent) => {
     event.cancelBubble = true;
-
   }, []);
 
   useEffect(() => {
     const containerElement = mainContainerElement.current;
 
-    containerElement?.addEventListener('transitionstart', handleTransitionStart, false);
+    containerElement?.addEventListener('transitionend', handleTransitionEnd, false);
 
     return () => {
-      containerElement?.removeEventListener('transitionstart', handleTransitionStart, false);
+      containerElement?.removeEventListener('transitionend', handleTransitionEnd, false);
     }
-  }, [handleTransitionStart])
+  }, [handleTransitionEnd])
 
   return (
     <div ref={mainContainerElement} className={styles.main_container}>
