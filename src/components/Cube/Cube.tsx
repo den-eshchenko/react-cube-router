@@ -81,7 +81,7 @@ export const CubeRouting = () => {
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент front стороны</div>}
+                contentComponent={<div>Божественный контент FRONT стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
@@ -89,7 +89,7 @@ export const CubeRouting = () => {
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент back стороны</div>}
+                contentComponent={<div>Божественный контент BACK стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
@@ -97,7 +97,7 @@ export const CubeRouting = () => {
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент right стороны</div>}
+                contentComponent={<div>Божественный контент RIGHT стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
@@ -105,7 +105,7 @@ export const CubeRouting = () => {
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент left стороны</div>}
+                contentComponent={<div>Божественный контент LEFT стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
@@ -113,7 +113,7 @@ export const CubeRouting = () => {
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент top стороны</div>}
+                contentComponent={<div>Божественный контент TOP стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
@@ -121,7 +121,7 @@ export const CubeRouting = () => {
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент bottom стороны</div>}
+                contentComponent={<div>Божественный контент BOTTOM стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>

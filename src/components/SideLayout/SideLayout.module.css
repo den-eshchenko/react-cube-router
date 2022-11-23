@@ -21,11 +21,11 @@
   flex-direction: column;
   justify-content: space-between;
   flex: 4;
+  padding: 1em;
 }
 
 .header {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex: 1;
 }
