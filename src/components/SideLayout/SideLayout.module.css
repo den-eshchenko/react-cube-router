@@ -1,27 +1,23 @@
 .main_container {
-  font-size: 30%;
+  font-size: 80%;
   width: 100%;
   height: 100%;
   display: flex;
 }
 
 .navigation_container {
-  font-size: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 1em;
+  padding: 10px;
 }
 
 .content_container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 4;
-  padding: 1em;
+  padding: 10px;
 }
 
 .header {

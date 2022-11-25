@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
@@ -43,13 +43,12 @@ export const CubeRouting = () => {
     event.stopImmediatePropagation();
     const side = params.side || '';
     
-    // срабатывает по 2 раза - возможно можно чекать что уже стоит в значениях
-    if (event.target === containerRef.current && event.propertyName === "font-size") {
+    if (event.target === containerRef.current) {
       setSearchParams({ previousSide: side });
       setRotationStyleProperty(`/${side}`);
     }
-    if (event.target === cubeRef.current && event.propertyName === "font-size") {
-      setSizeStyleProperty(45);
+    if (event.target === cubeRef.current) {
+      setSizeStyleProperty('1, 1, 1');
     }
   }, [params.side, setSearchParams]);
 
@@ -58,6 +57,7 @@ export const CubeRouting = () => {
     const currentSide = `/${params.side}`;
     
     setRotationStyleProperty(currentSide);
+    document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -12,7 +12,6 @@ export const NavigationBar = () => {
   return (
     <>
       <button
-          style={{ fontSize: '100%' }}
           onClick={() => {
             handleChangeSide('/front_side');
           }}
@@ -21,7 +20,6 @@ export const NavigationBar = () => {
           home
         </button>
       <button
-        style={{ fontSize: '100%' }}
         onClick={() => {
           // при клике меняется url на /back_side, сохраняется текущее положение отрисованным,
           // начинается анимация перехода, после анимации меняется previousSide на текущий url
@@ -31,7 +29,6 @@ export const NavigationBar = () => {
         back_side
       </button>
       <button
-        style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/front_side');
         }}
@@ -39,7 +36,6 @@ export const NavigationBar = () => {
         front_side
       </button>
       <button
-        style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/left_side');
         }}
@@ -47,7 +43,6 @@ export const NavigationBar = () => {
         left_side
       </button>
       <button
-        style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/right_side');
         }}
@@ -55,7 +50,6 @@ export const NavigationBar = () => {
         right_side
       </button>
       <button
-        style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/top_side');
         }}
@@ -63,7 +57,6 @@ export const NavigationBar = () => {
         top_side
       </button>
       <button
-        style={{ fontSize: '100%' }}
         onClick={() => {
           handleChangeSide('/bottom_side');
         }}

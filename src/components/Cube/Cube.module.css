@@ -12,17 +12,16 @@
     flex: 1;
 }
 
-
 /* контейнер куба */
 .container {
     position: relative;
-    width: 20em;
-    height: 20em;
-    perspective: 999999px;
-    transition: .3s;
+    width: var(--window-height);
+    height: var(--window-height);
+    transition: .5s;
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: scale3d(var(--scale-3d));
 }
 
 /* сам куб */
@@ -35,9 +34,11 @@
     justify-content: center;
     transition: 1s;
 }
+
 /* каждая сторона */
 .side {
     position: absolute;
+    /* backface-visibility: hidden; */
     width: inherit;
     height: inherit;
     display: flex;
@@ -47,29 +48,30 @@
     border: 1px solid #9da09d;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
+
 /* позиции сторон */
 .front {
-    transform: translateZ(10em);
+    transform: translateZ(calc(var(--window-height) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .back {
-    transform: rotateY(180deg) translateZ(10em);
+    transform: rotateY(180deg) translateZ(calc(var(--window-height) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .right {
-    transform: rotateY(90deg) translateZ(10em);
+    transform: rotateY(90deg) translateZ(calc(var(--window-height) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .left {
-    transform: rotateY(-90deg) translateZ(10em);
+    transform: rotateY(-90deg) translateZ(calc(var(--window-height) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .top {
-    transform: rotateX(90deg) translateZ(10em);
+    transform: rotateX(90deg) translateZ(calc(var(--window-height) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .bottom {
-    transform: rotateX(-90deg) translateZ(10em);
+    transform: rotateX(-90deg) translateZ(calc(var(--window-height) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 
