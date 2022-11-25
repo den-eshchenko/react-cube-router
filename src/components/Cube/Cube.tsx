@@ -10,12 +10,6 @@ import styles from './Cube.module.css';
 export const CubeRouting = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cubeRef = useRef<HTMLDivElement>(null);
-  const frontRef = useRef<HTMLDivElement>(null);
-  const backRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const topRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
   const params = useParams();
   const [, setSearchParams] = useSearchParams();
 
@@ -78,7 +72,7 @@ export const CubeRouting = () => {
       <div className={styles.cube_inner_section}>
         <div ref={containerRef} className={styles.container}>
           <div ref={cubeRef} className={`${styles.cube} ${styles.current_side}`}>
-            <div ref={frontRef} className={`${styles.side} ${styles.front}`}>
+            <div className={`${styles.side} ${styles.front}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
@@ -86,7 +80,7 @@ export const CubeRouting = () => {
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
-            <div ref={backRef} className={`${styles.side} ${styles.back}`}>
+            <div className={`${styles.side} ${styles.back}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
@@ -94,7 +88,7 @@ export const CubeRouting = () => {
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
-            <div ref={rightRef} className={`${styles.side} ${styles.right}`}>
+            <div className={`${styles.side} ${styles.right}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
@@ -102,7 +96,7 @@ export const CubeRouting = () => {
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
-            <div ref={leftRef} className={`${styles.side} ${styles.left}`}>
+            <div className={`${styles.side} ${styles.left}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
@@ -111,7 +105,7 @@ export const CubeRouting = () => {
               />
             </div>
             <div className={`${styles.external_top_side}`}></div>
-            <div ref={topRef} className={`${styles.side} ${styles.top} ${styles.inner_top_and_bottom_side}`}>
+            <div className={`${styles.side} ${styles.top} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
@@ -120,7 +114,7 @@ export const CubeRouting = () => {
               />
             </div>
             <div className={`${styles.external_bottom_side}`}></div>
-            <div ref={bottomRef} className={`${styles.side} ${styles.bottom} ${styles.inner_top_and_bottom_side}`}>
+            <div className={`${styles.side} ${styles.bottom} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
