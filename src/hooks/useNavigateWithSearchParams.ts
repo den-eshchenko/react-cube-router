@@ -6,7 +6,7 @@ export const useNavigateWithSearchParams = () => {
     const [searchParams] = useSearchParams();
     const previousSide = searchParams.get('previousSide') || 'front_side';
 
-    const navigateWithSearchParams = (nextSide: string, scale3d = '.5, .5, .5') => {
+    const navigateWithSearchParams = (nextSide: string, scale3d = '.3, .3, .3') => {
         if (nextSide.split('/')[1] === previousSide) {
             return;
         }

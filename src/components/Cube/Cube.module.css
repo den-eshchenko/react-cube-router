@@ -15,7 +15,7 @@
 /* контейнер куба */
 .container {
     position: relative;
-    width: var(--window-height);
+    width: var(--window-width);
     height: var(--window-height);
     transition: .5s;
     display: flex;
@@ -49,21 +49,47 @@
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
+.external_top_side {
+    width: var(--window-width);
+    height: var(--window-width);
+    position: absolute;
+    /* backface-visibility: hidden; */
+    border: 1px solid #9da09d;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    background: linear-gradient(#979a97, #c5c5c5) !important;
+    transform: rotateX(90deg) translateZ(calc(var(--window-height) / 2 - 1px));
+}
+.external_bottom_side {
+    width: var(--window-width);
+    height: var(--window-width);
+    position: absolute;
+    /* backface-visibility: hidden; */
+    border: 1px solid #9da09d;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    background: linear-gradient(#979a97, #c5c5c5) !important;
+    transform: rotateX(-90deg) translateZ(calc(var(--window-height) / 2 - 1px));
+}
+
+.inner_top_and_bottom_side {
+    border: none;
+    box-shadow: none;
+}
+
 /* позиции сторон */
 .front {
-    transform: translateZ(calc(var(--window-height) / 2));
+    transform: translateZ(calc(var(--window-width) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .back {
-    transform: rotateY(180deg) translateZ(calc(var(--window-height) / 2));
+    transform: rotateY(180deg) translateZ(calc(var(--window-width) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .right {
-    transform: rotateY(90deg) translateZ(calc(var(--window-height) / 2));
+    transform: rotateY(90deg) translateZ(calc(var(--window-width) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .left {
-    transform: rotateY(-90deg) translateZ(calc(var(--window-height) / 2));
+    transform: rotateY(-90deg) translateZ(calc(var(--window-width) / 2));
     background: linear-gradient(#9da09d, #C0C0C0);
 }
 .top {

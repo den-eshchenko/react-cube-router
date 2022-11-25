@@ -1,6 +1,7 @@
 :root {
   --side-3d: 0;
   --scale-3d: 1, 1, 1;
+  --window-width: 500px;
   --window-height: 500px;
 }
 
@@ -10,6 +11,7 @@ html, body {
   height: 100%;
   box-sizing: border-box;
   font-size: 16px;
+  overflow: hidden;
 }
 
 body {

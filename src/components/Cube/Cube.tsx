@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
@@ -57,6 +57,7 @@ export const CubeRouting = () => {
     const currentSide = `/${params.side}`;
     
     setRotationStyleProperty(currentSide);
+    document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
     document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -109,7 +110,8 @@ export const CubeRouting = () => {
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
-            <div ref={topRef} className={`${styles.side} ${styles.top}`}>
+            <div className={`${styles.external_top_side}`}></div>
+            <div ref={topRef} className={`${styles.side} ${styles.top} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
@@ -117,13 +119,14 @@ export const CubeRouting = () => {
                 footerComponent={<div>Классный подвал</div>}
               />
             </div>
-            <div ref={bottomRef} className={`${styles.side} ${styles.bottom}`}>
+            <div className={`${styles.external_bottom_side}`}></div>
+            <div ref={bottomRef} className={`${styles.side} ${styles.bottom} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
                 headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<div>Божественный контент BOTTOM стороны</div>}
                 footerComponent={<div>Классный подвал</div>}
-              />
+                />
             </div>
           </div>
         </div>
