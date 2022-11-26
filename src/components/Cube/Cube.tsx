@@ -37,10 +37,13 @@ export const CubeRouting = () => {
     event.stopImmediatePropagation();
     const side = params.side || '';
     
+    // анимация после уменьшения куба
     if (event.target === containerRef.current) {
       setSearchParams({ previousSide: side });
       setRotationStyleProperty(`/${side}`);
     }
+
+    // анимация после поворота куба
     if (event.target === cubeRef.current) {
       setSizeStyleProperty('1, 1, 1');
     }

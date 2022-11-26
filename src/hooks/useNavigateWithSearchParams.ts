@@ -7,8 +7,6 @@ export const useNavigateWithSearchParams = () => {
     const previousSide = searchParams.get('previousSide');
 
     const navigateWithSearchParams = (nextSide: string, scale3d = '.3, .3, .3') => {
-        console.log('nextSide', nextSide);
-        console.log('previousSide', previousSide);
         if (nextSide.split('/')[1] === previousSide) {
             return;
         }

@@ -1,3 +1,3 @@
 export const setSizeStyleProperty = (scale3d: string) => {
-    document.documentElement.style.setProperty("--scale-3d", scale3d);
+    document.documentElement.style.setProperty("--scale-cube", scale3d);
 };

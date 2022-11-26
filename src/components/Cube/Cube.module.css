@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale3d(var(--scale-3d));
+    transform: scale3d(var(--scale-cube));
 }
 
 /* сам куб */
@@ -103,5 +103,5 @@
 
 /*текущее положение в зависимости от параметров роутера*/
 .current_side {
-    transform: rotate3d(var(--side-3d));
+    transform: rotate3d(var(--current-turn));
 }

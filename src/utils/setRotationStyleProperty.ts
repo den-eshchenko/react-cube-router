@@ -10,5 +10,5 @@ export const SIDE_ROTATION_DATA: Record<string, string> = {
 export const setRotationStyleProperty = (nextSide : string | null = 'front_side') => {
     const side = nextSide?.split?.('/')?.[1] || 'front_side';
 
-    document.documentElement.style.setProperty("--side-3d", `${SIDE_ROTATION_DATA[side]}`);
+    document.documentElement.style.setProperty("--current-turn", `${SIDE_ROTATION_DATA[side]}`);
 };
