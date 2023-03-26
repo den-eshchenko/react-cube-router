@@ -1,68 +1,47 @@
 import { HomeOutlined } from "@ant-design/icons";
+import { Button, Switch } from "antd";
+import { useState } from "react";
 import { useNavigateWithSearchParams } from "../../hooks/useNavigateWithSearchParams";
 
-export const NavigationBar = () => {
-  const { navigateWithSearchParams } = useNavigateWithSearchParams();
+import styles from './NavigationBar.module.css';
 
-  const handleChangeSide = (path: string) => {
+export const NavigationBar = () => {
+  const { navigateWithSearchParams } = useNavigateWithSearchParams()
+  const [isSimpleAnimation, setIsSimpleAnimation] = useState(false)
+
+  const handleChangeAnimationType = () => {
+    setIsSimpleAnimation(isChecked => !isChecked)
+  }
+
+  const handleChangeSide = (path: string) => () => {
     // начинается уменьшение куба, далее transitionend у containerRef.current
-    navigateWithSearchParams(path);
-  };
+    navigateWithSearchParams({ nextSide: path })
+  }
 
   return (
-    <>
-      <button
-          onClick={() => {
-            handleChangeSide('/front_side');
-          }}
-        >
+    <div className={styles.container}>
+      <Switch checked={isSimpleAnimation} onChange={handleChangeAnimationType} />
+      <Button onClick={handleChangeSide('/front_side')}>
           <HomeOutlined />
-          home
-        </button>
-      <button
-        onClick={() => {
-          // при клике меняется url на /back_side, сохраняется текущее положение отрисованным,
-          // начинается анимация перехода, после анимации меняется previousSide на текущий url
-          handleChangeSide('/back_side');
-        }}
-      >
-        back_side
-      </button>
-      <button
-        onClick={() => {
-          handleChangeSide('/front_side');
-        }}
-      >
-        front_side
-      </button>
-      <button
-        onClick={() => {
-          handleChangeSide('/left_side');
-        }}
-      >
-        left_side
-      </button>
-      <button
-        onClick={() => {
-          handleChangeSide('/right_side');
-        }}
-      >
-        right_side
-      </button>
-      <button
-        onClick={() => {
-          handleChangeSide('/top_side');
-        }}
-      >
-        top_side
-      </button>
-      <button
-        onClick={() => {
-          handleChangeSide('/bottom_side');
-        }}
-      >
-        bottom_side
-      </button>
-    </>
+        </Button>
+      <Button onClick={handleChangeSide('/back_side')}> {/*при клике меняется url на /back_side, сохраняется текущее положение отрисованным, начинается анимация перехода, после анимации меняется previousSide на текущий url */}
+        B
+      </Button>
+      <Button onClick={handleChangeSide('/front_side')}>
+        F
+      </Button>
+      <Button onClick={handleChangeSide('/left_side')}>
+        L
+      </Button>
+      <Button onClick={handleChangeSide('/right_side')}>
+        R
+      </Button>
+      <Button onClick={handleChangeSide('/top_side')}>
+        T
+      </Button>
+      <Button onClick={handleChangeSide('/bottom_side')}>
+        B
+      </Button>
+    </div>
   );
 };

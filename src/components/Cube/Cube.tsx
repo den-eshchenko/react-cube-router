@@ -2,7 +2,9 @@ import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
+import { DefaultContentComponent } from '../Content/DefaultContentComponent';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
+import { Error } from '../NotFound/Error';
 import { SideLayout } from '../SideLayout/SideLayout';
 
 import styles from './Cube.module.css';
@@ -31,7 +33,6 @@ export const CubeRouting = () => {
   //   }
   // }, []);
 
-
   const handleTransitionEnd = useCallback((event: TransitionEvent) => {
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -49,6 +50,15 @@ export const CubeRouting = () => {
     }
   }, [params.side, setSearchParams]);
 
+  const handleTransitionEndSimpleAnimation = useCallback((event: TransitionEvent) => {
+    event.stopPropagation();
+    const side = params.side || '';
+    
+    if (event.target === cubeRef.current) {
+      setSearchParams({ previousSide: side });
+    }
+  }, [params.side, setSearchParams]);
+
   // смена позиции после перезагрузки страницы, если поставить useEffect, то нарисуется куб по стартовым позициям и только потом прокрутится до той что в url 
   useLayoutEffect(() => {
     const currentSide = `/${params.side}`;
@@ -63,66 +73,67 @@ export const CubeRouting = () => {
   useLayoutEffect(() => {
     const containerElement = containerRef.current;
 
-    containerElement?.addEventListener('transitionend', handleTransitionEnd, false);
+    containerElement?.addEventListener('transitionend', handleTransitionEndSimpleAnimation, false);
 
     return () => {
-      containerElement?.removeEventListener('transitionend', handleTransitionEnd, false);
+      containerElement?.removeEventListener('transitionend', handleTransitionEndSimpleAnimation, false);
     };
-  }, [handleTransitionEnd]);
+  }, [handleTransitionEndSimpleAnimation]);
 
   return (
     <div className={styles.cube_section}>
       <div className={styles.cube_inner_section}>
         <div ref={containerRef} className={styles.container}>
           <div ref={cubeRef} className={`${styles.cube} ${styles.current_side}`}>
+            {/* <Error /> */}
             <div className={`${styles.side} ${styles.front}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент FRONT стороны</div>}
-                footerComponent={<div>Классный подвал</div>}
+                // headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<DefaultContentComponent label='FRONT' />}
+                // footerComponent={<div>Классный подвал</div>}
               />
-            </div>
+            </div>  
             <div className={`${styles.side} ${styles.back}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент BACK стороны</div>}
-                footerComponent={<div>Классный подвал</div>}
+                // headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<DefaultContentComponent label="BACK" />}
+                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.side} ${styles.right}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент RIGHT стороны</div>}
-                footerComponent={<div>Классный подвал</div>}
+                // headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<DefaultContentComponent label="RIGHT" />}
+                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.side} ${styles.left}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент LEFT стороны</div>}
-                footerComponent={<div>Классный подвал</div>}
+                // headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<DefaultContentComponent label="LEFT" />}
+                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.external_top_side}`}></div>
             <div className={`${styles.side} ${styles.top} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент TOP стороны</div>}
-                footerComponent={<div>Классный подвал</div>}
+                // headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<DefaultContentComponent label="TOP" />}
+                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.external_bottom_side}`}></div>
             <div className={`${styles.side} ${styles.bottom} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                headerComponent={<div>Топовый заголовок</div>}
-                contentComponent={<div>Божественный контент BOTTOM стороны</div>}
-                footerComponent={<div>Классный подвал</div>}
+                // headerComponent={<div>Топовый заголовок</div>}
+                contentComponent={<DefaultContentComponent label="BOTTOM" />}
+                // footerComponent={<div>Классный подвал</div>}
                 />
             </div>
           </div>

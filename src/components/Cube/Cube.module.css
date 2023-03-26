@@ -32,21 +32,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 1s;
+    transition: 2s;
 }
 
 /* каждая сторона */
 .side {
     position: absolute;
-    /* backface-visibility: hidden; */
+    backface-visibility: hidden;
     width: inherit;
     height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 1px solid #9da09d;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    /* border: 1px solid #9da09d; */
+    /* box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; */
 }
 
 .external_top_side {
@@ -54,9 +54,9 @@
     height: var(--window-width);
     position: absolute;
     /* backface-visibility: hidden; */
-    border: 1px solid #9da09d;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-    background: linear-gradient(#979a97, #c8c6c6) !important;
+    /* border: 1px solid #9da09d; */
+    /* box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; */
+    /* background: linear-gradient(#979a97, #c8c6c6) !important; */
     transform: rotateX(90deg) translateZ(calc(var(--window-height) / 2 - 1px));
 }
 .external_bottom_side {
@@ -64,9 +64,9 @@
     height: var(--window-width);
     position: absolute;
     /* backface-visibility: hidden; */
-    border: 1px solid #9da09d;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-    background: linear-gradient(#979a97, #c8c6c6) !important;
+    /* border: 1px solid #9da09d; */
+    /* box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; */
+    /* background: linear-gradient(#979a97, #c8c6c6) !important; */
     transform: rotateX(-90deg) translateZ(calc(var(--window-height) / 2 - 1px));
 }
 
@@ -78,27 +78,27 @@
 /* позиции сторон */
 .front {
     transform: translateZ(calc(var(--window-width) / 2));
-    background: linear-gradient(#9da09d, #C0C0C0);
+    /* background: linear-gradient(#9da09d, #C0C0C0); */
 }
 .back {
     transform: rotateY(180deg) translateZ(calc(var(--window-width) / 2));
-    background: linear-gradient(#9da09d, #C0C0C0);
+    /* background: linear-gradient(#9da09d, #C0C0C0); */
 }
 .right {
     transform: rotateY(90deg) translateZ(calc(var(--window-width) / 2));
-    background: linear-gradient(#9da09d, #C0C0C0);
+    /* background: linear-gradient(#9da09d, #C0C0C0); */
 }
 .left {
     transform: rotateY(-90deg) translateZ(calc(var(--window-width) / 2));
-    background: linear-gradient(#9da09d, #C0C0C0);
+    /* background: linear-gradient(#9da09d, #C0C0C0); */
 }
 .top {
     transform: rotateX(90deg) translateZ(calc(var(--window-height) / 2));
-    background: linear-gradient(#9da09d, #C0C0C0);
+    /* background: linear-gradient(#9da09d, #C0C0C0); */
 }
 .bottom {
     transform: rotateX(-90deg) translateZ(calc(var(--window-height) / 2));
-    background: linear-gradient(#9da09d, #C0C0C0);
+    /* background: linear-gradient(#9da09d, #C0C0C0); */
 }
 
 /*текущее положение в зависимости от параметров роутера*/

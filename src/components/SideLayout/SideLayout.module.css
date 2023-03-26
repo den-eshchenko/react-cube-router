@@ -8,7 +8,7 @@
 .navigation_container {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  /* flex: 1; */
   padding: 10px;
 }
 
@@ -30,7 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 4;
+  flex: 10;
+  overflow: auto;
 }
 
 .footer {

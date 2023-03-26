@@ -4,9 +4,9 @@ import styles from './SideLayout.module.css';
 
 type SideLayoutProps = {
   navigationComponent: ReactElement,
-  headerComponent: ReactElement,
+  headerComponent?: ReactElement,
   contentComponent: ReactElement,
-  footerComponent: ReactElement,
+  footerComponent?: ReactElement,
 }
 
 export const SideLayout: FC<SideLayoutProps> = ({ navigationComponent, headerComponent, contentComponent, footerComponent }) => {
@@ -32,15 +32,19 @@ export const SideLayout: FC<SideLayoutProps> = ({ navigationComponent, headerCom
           {navigationComponent}
         </div>
         <div className={styles.content_container}>
-          <div className={styles.header}>
-            {headerComponent}
+          {headerComponent && (
+            <div className={styles.header}>
+              {headerComponent}
           </div>
+          )}
           <div className={styles.content}>
             {contentComponent}
           </div>
-          <div className={styles.footer}>
-            {footerComponent}
-          </div>
+          {footerComponent && (
+            <div className={styles.footer}>
+              {footerComponent}
+            </div>
+          )}
         </div>
     </div>
   );

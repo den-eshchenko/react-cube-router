@@ -1,0 +1,4 @@
+.not_found {
+    font-size: 80px;
+    transform: rotate3d(var(--current-turn-error));
+}
