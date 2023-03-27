@@ -22,7 +22,7 @@ export const useNavigateWithSearchParams = () => {
             search: `?${createSearchParams({ previousSide: previousSide || 'front_side' })}`,
         };
 
-        setRotationStyleProperty(nextSide);
+        // setRotationStyleProperty(nextSide);
         // setSizeStyleProperty(scale3d)
         navigate(options)
     }

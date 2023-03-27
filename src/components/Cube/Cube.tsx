@@ -1,5 +1,6 @@
 import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { rotateStrategy } from '../..';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
@@ -33,31 +34,42 @@ export const CubeRouting = () => {
   //   }
   // }, []);
 
+  // const handleTransitionEnd = useCallback((event: TransitionEvent) => {
+  //   event.stopPropagation();
+  //   event.stopImmediatePropagation();
+  //   const side = params.side || '';
+    
+  //   // анимация после уменьшения куба
+  //   if (event.target === containerRef.current) {
+  //     setSearchParams({ previousSide: side });
+  //     setRotationStyleProperty(`/${side}`);
+  //   }
+
+  //   // анимация после поворота куба
+  //   if (event.target === cubeRef.current) {
+  //     setSizeStyleProperty('1, 1, 1');
+  //   }
+  // }, [params.side, setSearchParams]);
+
+  // const handleTransitionEndSimpleAnimation = useCallback((event: TransitionEvent) => {
+  //   event.stopPropagation();
+  //   const side = params.side || '';
+    
+  //   if (event.target === cubeRef.current) {
+  //     setSearchParams({ previousSide: side });
+  //   }
+  // }, [params.side, setSearchParams]);
+
   const handleTransitionEnd = useCallback((event: TransitionEvent) => {
-    event.stopPropagation();
-    event.stopImmediatePropagation();
     const side = params.side || '';
     
-    // анимация после уменьшения куба
-    if (event.target === containerRef.current) {
-      setSearchParams({ previousSide: side });
-      setRotationStyleProperty(`/${side}`);
-    }
-
-    // анимация после поворота куба
-    if (event.target === cubeRef.current) {
-      setSizeStyleProperty('1, 1, 1');
-    }
-  }, [params.side, setSearchParams]);
-
-  const handleTransitionEndSimpleAnimation = useCallback((event: TransitionEvent) => {
-    event.stopPropagation();
-    const side = params.side || '';
-    
-    if (event.target === cubeRef.current) {
-      setSearchParams({ previousSide: side });
-    }
-  }, [params.side, setSearchParams]);
+    rotateStrategy.strategy.handleTransitionEnd({
+      event,
+      side,
+      containerRef: containerRef.current,
+      cubeRef: cubeRef.current
+    })
+  }, [params.side]);
 
   // смена позиции после перезагрузки страницы, если поставить useEffect, то нарисуется куб по стартовым позициям и только потом прокрутится до той что в url 
   useLayoutEffect(() => {
@@ -73,12 +85,12 @@ export const CubeRouting = () => {
   useLayoutEffect(() => {
     const containerElement = containerRef.current;
 
-    containerElement?.addEventListener('transitionend', handleTransitionEndSimpleAnimation, false);
+    containerElement?.addEventListener('transitionend', handleTransitionEnd, false);
 
     return () => {
-      containerElement?.removeEventListener('transitionend', handleTransitionEndSimpleAnimation, false);
+      containerElement?.removeEventListener('transitionend', handleTransitionEnd, false);
     };
-  }, [handleTransitionEndSimpleAnimation]);
+  }, [handleTransitionEnd]);
 
   return (
     <div className={styles.cube_section}>
@@ -89,51 +101,39 @@ export const CubeRouting = () => {
             <div className={`${styles.side} ${styles.front}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                // headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<DefaultContentComponent label='FRONT' />}
-                // footerComponent={<div>Классный подвал</div>}
               />
             </div>  
             <div className={`${styles.side} ${styles.back}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                // headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<DefaultContentComponent label="BACK" />}
-                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.side} ${styles.right}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                // headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<DefaultContentComponent label="RIGHT" />}
-                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.side} ${styles.left}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                // headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<DefaultContentComponent label="LEFT" />}
-                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.external_top_side}`}></div>
             <div className={`${styles.side} ${styles.top} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                // headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<DefaultContentComponent label="TOP" />}
-                // footerComponent={<div>Классный подвал</div>}
               />
             </div>
             <div className={`${styles.external_bottom_side}`}></div>
             <div className={`${styles.side} ${styles.bottom} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                // headerComponent={<div>Топовый заголовок</div>}
                 contentComponent={<DefaultContentComponent label="BOTTOM" />}
-                // footerComponent={<div>Классный подвал</div>}
                 />
             </div>
           </div>

@@ -1,7 +1,10 @@
 import { HomeOutlined } from "@ant-design/icons";
 import { Button, Switch } from "antd";
 import { useState } from "react";
+import { rotateStrategy } from "../..";
 import { useNavigateWithSearchParams } from "../../hooks/useNavigateWithSearchParams";
+import { RotateDefaultStrategy } from "../../strategys/rotate/rotateDefaultStrategy";
+import { RotateScaleStrategy } from "../../strategys/rotate/rotateScaleStrategy";
 
 import styles from './NavigationBar.module.css';
 
@@ -10,12 +13,25 @@ export const NavigationBar = () => {
   const [isSimpleAnimation, setIsSimpleAnimation] = useState(false)
 
   const handleChangeAnimationType = () => {
-    setIsSimpleAnimation(isChecked => !isChecked)
+    setIsSimpleAnimation(isChecked => {
+      const checked = !isChecked
+
+      if (checked) {
+        rotateStrategy.setStrategy(new RotateScaleStrategy())
+      }
+
+      if (!checked) {
+        rotateStrategy.setStrategy(new RotateDefaultStrategy())
+      }
+
+      return checked
+    })
   }
 
   const handleChangeSide = (path: string) => () => {
     // начинается уменьшение куба, далее transitionend у containerRef.current
     navigateWithSearchParams({ nextSide: path })
+    rotateStrategy.runRotate({ nextSide: path })
   }
 
   return (
