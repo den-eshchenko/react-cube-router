@@ -16,6 +16,7 @@ export interface IRotateStrategy<Values = any> {
 
 interface IMainRotateStrategy<Values> {
   strategy: IRotateStrategy
+  currentSide: string
   getStrategy: () => IRotateStrategy
   setStrategy: (strategy: IRotateStrategy) => void
   runRotate: (props: IRunRotateProps<Values>) => void
@@ -23,9 +24,11 @@ interface IMainRotateStrategy<Values> {
 
 export class MainRotateStrategy<Values = any> implements IMainRotateStrategy<Values> {
   strategy: IRotateStrategy
+  currentSide: string
 
   constructor(data: { strategy: IRotateStrategy }) {
     this.strategy = data.strategy
+    this.currentSide = '/front_side'
   }
 
   getStrategy() {
@@ -36,7 +39,14 @@ export class MainRotateStrategy<Values = any> implements IMainRotateStrategy<Val
     this.strategy = strategy
   }
 
+  setCurrentSide(nextSide: string) {
+    this.currentSide = nextSide
+  }
+
   runRotate({ nextSide, scale }: IRunRotateProps<Values>) {
-    this.strategy.rotate({ nextSide, scale })
+    if (this.currentSide !== nextSide) {
+      this.setCurrentSide(nextSide)
+      this.strategy.rotate({ nextSide, scale })
+    }
   }
 }

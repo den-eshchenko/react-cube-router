@@ -1,29 +1,24 @@
-import { useSearchParams, useNavigate, createSearchParams } from "react-router-dom";
-import { setRotationStyleProperty } from "../utils/setRotationStyleProperty";
-import { setSizeStyleProperty } from "../utils/setSizeStyleProperty";
+import { useNavigate, useParams } from "react-router-dom";
 
 type TNavigateWithSearchParams = {
     nextSide: string
-    scale3d?: string
 }
 
 export const useNavigateWithSearchParams = () => {
     const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
-    const previousSide = searchParams.get('previousSide')
+    const params = useParams();
+    const currentSide = params.side || '';
 
-    const navigateWithSearchParams = ({ nextSide, scale3d = '1, 1, 1'}: TNavigateWithSearchParams) => {
-        if (nextSide.split('/')[1] === previousSide) {
+    const navigateWithSearchParams = ({ nextSide}: TNavigateWithSearchParams) => {
+        if (nextSide.split('/')[1] === currentSide) {
             return
         }
 
         const options = {
             pathname: nextSide,
-            search: `?${createSearchParams({ previousSide: previousSide || 'front_side' })}`,
+            // search: `?${createSearchParams({ previousSide: previousSide || 'front_side' })}`,
         };
 
-        // setRotationStyleProperty(nextSide);
-        // setSizeStyleProperty(scale3d)
         navigate(options)
     }
 

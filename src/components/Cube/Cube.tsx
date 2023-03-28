@@ -1,8 +1,7 @@
 import { useCallback, useLayoutEffect, useRef } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { rotateStrategy } from '../..';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
-import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
 import { Error } from '../NotFound/Error';
@@ -14,7 +13,6 @@ export const CubeRouting = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cubeRef = useRef<HTMLDivElement>(null);
   const params = useParams();
-  const [, setSearchParams] = useSearchParams();
 
   // useEffect(() => {
   //   let rotateY = 0;
@@ -34,34 +32,10 @@ export const CubeRouting = () => {
   //   }
   // }, []);
 
-  // const handleTransitionEnd = useCallback((event: TransitionEvent) => {
-  //   event.stopPropagation();
-  //   event.stopImmediatePropagation();
-  //   const side = params.side || '';
-    
-  //   // анимация после уменьшения куба
-  //   if (event.target === containerRef.current) {
-  //     setSearchParams({ previousSide: side });
-  //     setRotationStyleProperty(`/${side}`);
-  //   }
-
-  //   // анимация после поворота куба
-  //   if (event.target === cubeRef.current) {
-  //     setSizeStyleProperty('1, 1, 1');
-  //   }
-  // }, [params.side, setSearchParams]);
-
-  // const handleTransitionEndSimpleAnimation = useCallback((event: TransitionEvent) => {
-  //   event.stopPropagation();
-  //   const side = params.side || '';
-    
-  //   if (event.target === cubeRef.current) {
-  //     setSearchParams({ previousSide: side });
-  //   }
-  // }, [params.side, setSearchParams]);
-
   const handleTransitionEnd = useCallback((event: TransitionEvent) => {
     const side = params.side || '';
+
+    // console.log('side', side)
     
     rotateStrategy.strategy.handleTransitionEnd({
       event,
@@ -75,6 +49,7 @@ export const CubeRouting = () => {
   useLayoutEffect(() => {
     const currentSide = `/${params.side}`;
     
+    rotateStrategy.setCurrentSide(currentSide)
     setRotationStyleProperty(currentSide);
     document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
     document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);

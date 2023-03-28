@@ -15,7 +15,6 @@ export class RotateScaleStrategy implements IRotateStrategy {
     
     // анимация после уменьшения куба
     if (event.target === containerRef) {
-      console.log(1)
       setRotationStyleProperty(`/${side}`);
     }
 
