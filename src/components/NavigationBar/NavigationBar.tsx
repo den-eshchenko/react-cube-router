@@ -31,7 +31,7 @@ export const NavigationBar = () => {
   const handleChangeSide = (path: string) => () => {
     // начинается уменьшение куба, далее transitionend у containerRef.current
     navigateWithSearchParams({ nextSide: path })
-    rotateStrategy.runRotate({ nextSide: path, scale: '.3, .3, .3' })
+    rotateStrategy.runRotate({ nextSide: path, scale: '.5, .5, .5' })
   }
 
   return (

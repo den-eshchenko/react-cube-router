@@ -35,8 +35,6 @@ export const CubeRouting = () => {
   const handleTransitionEnd = useCallback((event: TransitionEvent) => {
     const side = params.side || '';
 
-    // console.log('side', side)
-    
     rotateStrategy.strategy.handleTransitionEnd({
       event,
       side,
