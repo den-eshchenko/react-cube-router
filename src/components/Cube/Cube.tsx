@@ -1,5 +1,5 @@
-import { useCallback, useLayoutEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { rotateStrategy } from '../..';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
@@ -13,6 +13,7 @@ export const CubeRouting = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cubeRef = useRef<HTMLDivElement>(null);
   const params = useParams();
+  const location = useLocation()
 
   // useEffect(() => {
   //   let rotateY = 0;
@@ -64,6 +65,10 @@ export const CubeRouting = () => {
       containerElement?.removeEventListener('transitionend', handleTransitionEnd, false);
     };
   }, [handleTransitionEnd]);
+
+  useEffect(() => {
+    rotateStrategy.runRotate({ nextSide: location.pathname, scale: '.5, .5, .5' })
+  }, [location])
 
   return (
     <div className={styles.cube_section}>
