@@ -1,7 +1,8 @@
 import { HomeOutlined } from "@ant-design/icons";
 import { Button, Switch } from "antd";
-import { useState } from "react";
 import { rotateStrategy } from "../..";
+import { changeType } from "../../app/simpleAnimation";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 import { useNavigateWithSearchParams } from "../../hooks/useNavigateWithSearchParams";
 import { RotateDefaultStrategy } from "../../strategies/rotate/rotateDefaultStrategy";
 import { RotateScaleStrategy } from "../../strategies/rotate/rotateScaleStrategy";
@@ -10,22 +11,18 @@ import styles from './NavigationBar.module.css';
 
 export const NavigationBar = () => {
   const { navigateWithSearchParams } = useNavigateWithSearchParams()
-  const [isSimpleAnimation, setIsSimpleAnimation] = useState(false)
+  const isSimpleAnimation = useAppSelector(state => state.simpleAnimation.isSimpleAnimation)
+  const dispatch = useAppDispatch()
 
   const handleChangeAnimationType = () => {
-    setIsSimpleAnimation(isChecked => {
-      const checked = !isChecked
+    dispatch(changeType())
+    if (!isSimpleAnimation) {
+      rotateStrategy.setStrategy(new RotateScaleStrategy())
+    }
 
-      if (checked) {
-        rotateStrategy.setStrategy(new RotateScaleStrategy())
-      }
-
-      if (!checked) {
-        rotateStrategy.setStrategy(new RotateDefaultStrategy())
-      }
-
-      return checked
-    })
+    if (isSimpleAnimation) {
+      rotateStrategy.setStrategy(new RotateDefaultStrategy())
+    }
   }
 
   const handleChangeSide = (path: string) => () => {
