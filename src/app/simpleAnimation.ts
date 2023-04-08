@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  isSimpleAnimation: false
+  isSimpleAnimation: true
 }
 
 export const counterSlice = createSlice({

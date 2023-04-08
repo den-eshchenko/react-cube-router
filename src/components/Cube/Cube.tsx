@@ -4,7 +4,7 @@ import { rotateStrategy } from '../..';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
-import { Error } from '../NotFound/Error';
+// import { Error } from '../NotFound/Error';
 import { SideLayout } from '../SideLayout/SideLayout';
 
 import styles from './Cube.module.css';
@@ -44,7 +44,6 @@ export const CubeRouting = () => {
     })
   }, [params.side]);
 
-  // смена позиции после перезагрузки страницы, если поставить useEffect, то нарисуется куб по стартовым позициям и только потом прокрутится до той что в url 
   useLayoutEffect(() => {
     const currentSide = `/${params.side}`;
     
@@ -55,7 +54,6 @@ export const CubeRouting = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // смена previousSide после анимации поворота
   useLayoutEffect(() => {
     const containerElement = containerRef.current;
 

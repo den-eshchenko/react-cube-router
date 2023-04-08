@@ -1,46 +1,54 @@
 import { setRotationStyleProperty } from "../../utils/setRotationStyleProperty"
+import { setScaleStyleProperty } from "../../utils/setScaleStyleProperty"
 import { setSizeStyleProperty } from "../../utils/setSizeStyleProperty"
 import { IRotateStrategy } from "./mainRotateStrategy"
 
-const stepOne = () => {
-  document.documentElement.style.setProperty("--window-width", `${window.innerHeight}px`);
-  document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+const sizeStepOne = () => {
+  setSizeStyleProperty(window.innerHeight, window.innerHeight)
 }
-const stepTwo = () => {}
-const stepThree = () => {
-  document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
-  document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+const sizeStepTwo = () => {}
+const sizeStepThree = () => {
+  setScaleStyleProperty('1, 1, 1');
 }
 
-function* generateSteps() {
-  yield stepOne()
-  yield stepTwo()
-  return stepThree()
+function* generateSizeSteps() {
+  yield sizeStepOne()
+  yield sizeStepTwo()
+  return sizeStepThree()
+}
+
+const rotateStepOne = (side?: string) => {
+  setRotationStyleProperty(side);
+}
+const rotateStepTwo = () => {
+  setSizeStyleProperty(window.innerWidth, window.innerHeight)
+}
+function* generateRotateSteps(nextSide?: string) {
+  yield rotateStepOne(nextSide)
+  return rotateStepTwo()
 }
 
 export class RotateScaleStrategy implements IRotateStrategy {
   label = 'rotate after scale'
-  steps = generateSteps()
+  sizeSteps = generateSizeSteps()
+  rotateSteps = generateRotateSteps()
 
   rotate(props: Parameters<IRotateStrategy['rotate']>[0]) {
-    const { scale } = props
-    setSizeStyleProperty(scale)
-    this.steps = generateSteps()
+    const { scale, nextSide } = props
+    setScaleStyleProperty(scale)
+    this.sizeSteps = generateSizeSteps()
+    this.rotateSteps = generateRotateSteps(nextSide)
   }
 
-  handleTransitionEnd({ event, side, cubeRef, containerRef }: Parameters<IRotateStrategy['handleTransitionEnd']>[0]) {
+  handleTransitionEnd({ event, cubeRef, containerRef }: Parameters<IRotateStrategy['handleTransitionEnd']>[0]) {
     event.stopPropagation();
     
-    // уменьшение, поворот, увеличение
-    // анимация после уменьшения куба
     if (event.target === containerRef) {
-      setRotationStyleProperty(`/${side}`);
-      this.steps.next()
+      this.sizeSteps.next()
     }
 
-    // анимация после поворота куба
     if (event.target === cubeRef) {
-      setSizeStyleProperty('1, 1, 1');
+      this.rotateSteps.next()
     }
   }
 }
