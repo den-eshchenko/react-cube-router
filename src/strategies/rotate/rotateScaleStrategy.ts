@@ -42,7 +42,7 @@ export class RotateScaleStrategy implements IRotateStrategy {
 
   handleTransitionEnd({ event, cubeRef, containerRef }: Parameters<IRotateStrategy['handleTransitionEnd']>[0]) {
     event.stopPropagation();
-    
+
     if (event.target === containerRef) {
       this.sizeSteps.next()
     }

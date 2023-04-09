@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { rotateStrategy } from '../..';
 import { setRotationStyleProperty } from '../../utils/setRotationStyleProperty';
+import { setSizeStyleProperty } from '../../utils/setSizeStyleProperty';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
 // import { Error } from '../NotFound/Error';
@@ -44,13 +45,16 @@ export const CubeRouting = () => {
     })
   }, [params.side]);
 
+  const handleResizeWindow = () => {
+    setSizeStyleProperty(window.innerWidth, window.innerHeight)
+  }
+
   useLayoutEffect(() => {
     const currentSide = `/${params.side}`;
     
     rotateStrategy.setCurrentSide(currentSide)
     setRotationStyleProperty(currentSide);
-    document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
-    document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+    setSizeStyleProperty(window.innerWidth, window.innerHeight)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,6 +71,14 @@ export const CubeRouting = () => {
   useEffect(() => {
     rotateStrategy.runRotate({ nextSide: location.pathname, scale: '.5, .5, .5' })
   }, [location])
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResizeWindow)
+
+    return () => {
+      window.removeEventListener('resize', handleResizeWindow)
+    }
+  }, [])
 
   return (
     <div className={styles.cube_section}>

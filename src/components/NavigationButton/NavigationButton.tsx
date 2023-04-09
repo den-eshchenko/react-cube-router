@@ -1,5 +1,6 @@
 import { Button, Tooltip } from "antd"
-import { useNavigateWithSearchParams } from "../hooks/useNavigateWithSearchParams"
+import { useNavigateWithSearchParams } from "../../hooks/useNavigateWithSearchParams"
+import styles from './NavigationButton.module.css'
 
 type TNavigationButton = {
   icon?: React.ReactNode
@@ -16,7 +17,7 @@ export const NavigationButton: React.FC<TNavigationButton> = ({ icon, title, pat
   }
   
   return (
-    <Tooltip title={tooltipTitle} placement="right" color="blue">
+    <Tooltip title={tooltipTitle} placement="right" color="blue" className={styles.navigationItem}>
       <Button onClick={handleChangeSide(`/${path}`)}>
           {icon || title}
       </Button>

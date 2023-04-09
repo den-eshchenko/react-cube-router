@@ -5,7 +5,7 @@ import { changeType } from "../../app/simpleAnimation";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { RotateDefaultStrategy } from "../../strategies/rotate/rotateDefaultStrategy";
 import { RotateScaleStrategy } from "../../strategies/rotate/rotateScaleStrategy";
-import { NavigationButton } from "../NavigationButton";
+import { NavigationButton } from "../NavigationButton/NavigationButton";
 
 import styles from './NavigationBar.module.css';
 
@@ -15,6 +15,7 @@ export const NavigationBar = () => {
 
   const handleChangeAnimationType = () => {
     dispatch(changeType())
+    
     if (isSimpleAnimation) {
       rotateStrategy.setStrategy(new RotateScaleStrategy())
     }
