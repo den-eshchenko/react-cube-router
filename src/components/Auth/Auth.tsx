@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useAuthMutation } from "../../api/auth";
@@ -11,9 +12,17 @@ export function Auth() {
     const { navigateWithSearchParams } = useNavigateWithSearchParams();
 
     const sendAuth = async () => {
-        const response = await sendAuthData({ username: login, password: password }).unwrap();
-        localStorage.setItem('token-access', response.access_token);
-        localStorage.setItem('token-refresh', response.refresh_token);
+        const response = await sendAuthData({ username: login, password: password });
+        if ('data' in response) {
+            localStorage.setItem('token-access', response.data.access_token);
+            localStorage.setItem('token-refresh', response.data.refresh_token);
+        }
+        if ('error' in response) {
+            notification.error({
+                message: 'Ошибка получения токена',
+                description: 'Что-то пошло не так',
+            })
+        }
     };
 
     useEffect(() => {
@@ -24,6 +33,7 @@ export function Auth() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //TODO: Добавить авторизацию
     return (
         <div>
             Введите логин
