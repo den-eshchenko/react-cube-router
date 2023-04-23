@@ -1,51 +1,60 @@
-import { notification } from "antd";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useAuthMutation } from "../../api/auth";
-import { useNavigateWithSearchParams } from "../../hooks/useNavigateWithSearchParams";
+import { KeyOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Form, Input, notification } from "antd";
+import { useDispatch } from "react-redux";
+import { useAuthMutation } from "../../api/authApi";
+import { changeAuth } from "../../app/auth";
+import styles from './Auth.module.css'
 
 export function Auth() {
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
+    const [form] = Form.useForm()
     const [sendAuthData] = useAuthMutation();
-    const params = useParams();
-    const { navigateWithSearchParams } = useNavigateWithSearchParams();
+    const dispatch = useDispatch()
 
     const sendAuth = async () => {
-        const response = await sendAuthData({ username: login, password: password });
-        if ('data' in response) {
-            localStorage.setItem('token-access', response.data.access_token);
-            localStorage.setItem('token-refresh', response.data.refresh_token);
-        }
-        if ('error' in response) {
-            notification.error({
-                message: 'Ошибка получения токена',
-                description: 'Что-то пошло не так',
-            })
+        try {
+            const { username, password } = await form.validateFields()
+            
+            const response = await sendAuthData({ username, password });
+            if ('data' in response) {
+                localStorage.setItem('token-access', response.data.access_token);
+                localStorage.setItem('token-refresh', response.data.refresh_token);
+                dispatch(changeAuth())
+            }
+            // if ('error' in response) {
+            //     notification.error({
+            //         message: 'Ошибка получения токена',
+            //         description: 'Что-то пошло не так',
+            //     })
+            // }
+        } catch (error) {
+            console.error(error)
         }
     };
 
-    useEffect(() => {
-        const side = params.side;
-        if (!side) {
-            navigateWithSearchParams({ nextSide: '/front_side' })
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    //TODO: Добавить авторизацию
     return (
-        <div>
-            Введите логин
-            <div>
-                <input type="text" onChange={(e) => {setLogin(e.target.value)}}/>
-            </div>
-            Введите пароль
-            <div>
-                <input type="password" onChange={(e) => {setPassword(e.target.value)}}/>
-            </div>
-
-            <button onClick={sendAuth}>Send</button>
+        <div className={styles.wrapper}>
+            <Form form={form} colon={false}>
+                <Form.Item
+                    name="username"
+                    label={<Avatar style={{ backgroundColor: '#87d068' }}
+                    icon={<UserOutlined />} />}
+                    rules={[{ required: true, message: "Username is required" }]}
+                >
+                    <Input placeholder="Enter username" />
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    label={<Avatar style={{ backgroundColor: '#87d068' }}
+                    icon={<KeyOutlined />} />}
+                    rules={[{ required: true, message: "Password is required" }]}
+                >
+                    <Input placeholder="Enter password" />
+                </Form.Item>
+                <div className={styles.actionWrapper}>
+                    <Button>Clear</Button>
+                    <Button onClick={sendAuth}>Send</Button>
+                </div>
+            </Form>
         </div>
     );
 }

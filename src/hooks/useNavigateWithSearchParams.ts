@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 type TNavigateWithSearchParams = {
@@ -9,7 +10,7 @@ export const useNavigateWithSearchParams = () => {
     const params = useParams();
     const currentSide = params.side || '';
 
-    const navigateWithSearchParams = ({ nextSide}: TNavigateWithSearchParams) => {
+    const navigateWithSearchParams = useCallback(({ nextSide}: TNavigateWithSearchParams) => {
         if (nextSide.split('/')[1] === currentSide) {
             return
         }
@@ -20,7 +21,7 @@ export const useNavigateWithSearchParams = () => {
         };
 
         navigate(options)
-    }
+    }, [currentSide, navigate])
 
     return { navigateWithSearchParams }
 }

@@ -1,14 +1,16 @@
 import { useCallback, useRef, useLayoutEffect, useEffect } from 'react'
 import { useLocation, useParams } from "react-router-dom";
 import { rotateStrategy } from '..';
+import { useAppSelector } from '../app/store';
 import { setRotationStyleProperty } from '../utils/setRotationStyleProperty';
 import { setSizeStyleProperty } from '../utils/setSizeStyleProperty';
 
 export const useChangeSide = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cubeRef = useRef<HTMLDivElement>(null);
-  const params = useParams();
+  const containerRef = useRef<HTMLDivElement>(null)
+  const cubeRef = useRef<HTMLDivElement>(null)
+  const params = useParams()
   const location = useLocation()
+  const isAuth = useAppSelector((store) => store.auth.isAuth)
 
   // useEffect(() => {
   //   let rotateY = 0;
@@ -76,6 +78,7 @@ export const useChangeSide = () => {
 
   return {
     containerRef,
-    cubeRef
+    cubeRef,
+    isAuth,
   }
 }

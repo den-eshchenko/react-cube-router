@@ -1,13 +1,15 @@
 import { useChangeSide } from '../../hooks/useChangeSide';
+import { Auth } from '../Auth/Auth';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
 // import { Error } from '../NotFound/Error';
 import { SideLayout } from '../SideLayout/SideLayout';
+import { ChatPage } from '../SidePages/ChatPage/ChatPage';
 
 import styles from './Cube.module.css';
 
-export const CubeRouting = () => {
-  const { containerRef, cubeRef } = useChangeSide()
+export const Cube = () => {
+  const { containerRef, cubeRef, isAuth } = useChangeSide()
 
   return (
     <div className={styles.cube_section}>
@@ -18,7 +20,7 @@ export const CubeRouting = () => {
             <div className={`${styles.side} ${styles.front}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                contentComponent={<DefaultContentComponent label='FRONT' />}
+                contentComponent={isAuth ? <ChatPage /> : <Auth />}
               />
             </div>  
             <div className={`${styles.side} ${styles.back}`}>
