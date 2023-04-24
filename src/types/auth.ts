@@ -3,7 +3,7 @@ export type ResponseAuth = {
   refresh_token: string;
 };
 export type RequestAuth = {
-  username: string;
+  login: string;
   password: string;
 };
 
@@ -15,3 +15,10 @@ export interface Tokens {
 export type ResponseRefreshToken = {
   access_token: string;
 };
+
+export type RequestRegistration = {
+  login: string;
+  fullName: string;
+  email: string;
+  password: string;
+}

@@ -1,4 +1,4 @@
-import { RequestAuth, ResponseAuth } from '../types/auth';
+import { RequestAuth, RequestRegistration, ResponseAuth } from '../types/auth';
 import { commonApi } from './commonApi';
 
 export const authApi = commonApi.injectEndpoints({
@@ -10,10 +10,17 @@ export const authApi = commonApi.injectEndpoints({
           body,
         }),
       }),
+      registration: builder.mutation<void, RequestRegistration>({
+        query: (body) => ({
+          url: 'auth/registration',
+          method: 'POST',
+          body,
+        }),
+      }),
     }),
   });
 
-export const { useAuthMutation } = authApi;
+export const { useAuthMutation, useRegistrationMutation } = authApi;
 
 // export const messageApi = commonApi.injectEndpoints({
 //   endpoints: (build) => ({

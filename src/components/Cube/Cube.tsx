@@ -1,7 +1,9 @@
 import { useChangeSide } from '../../hooks/useChangeSide';
 import { Auth } from '../Auth/Auth';
 import { DefaultContentComponent } from '../Content/DefaultContentComponent';
+import { Logout } from '../Logout/Logout';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
+import { Registration } from '../Registration/Registration';
 // import { Error } from '../NotFound/Error';
 import { SideLayout } from '../SideLayout/SideLayout';
 import { ChatPage } from '../SidePages/ChatPage/ChatPage';
@@ -32,7 +34,7 @@ export const Cube = () => {
             <div className={`${styles.side} ${styles.right}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                contentComponent={<DefaultContentComponent label="RIGHT" />}
+                contentComponent={isAuth ? <DefaultContentComponent label="RIGHT" /> : <Registration />}
               />
             </div>
             <div className={`${styles.side} ${styles.left}`}>
@@ -52,7 +54,7 @@ export const Cube = () => {
             <div className={`${styles.side} ${styles.bottom} ${styles.inner_top_and_bottom_side}`}>
               <SideLayout
                 navigationComponent={<NavigationBar />}
-                contentComponent={<DefaultContentComponent label="BOTTOM" />}
+                contentComponent={isAuth ? <Logout /> : <DefaultContentComponent label="BOTTOM" />}
                 />
             </div>
           </div>
