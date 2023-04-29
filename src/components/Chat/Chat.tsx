@@ -1,12 +1,20 @@
-// import styles from './Chat.module'
 import { Messages } from './Messages/Messages'
+import { SendMessage } from './SendMessage/SendMessage'
 import { Rooms } from './Rooms/Rooms'
+import styles from './Chat.module.css'
 
-export const Chat = () => {
+type TChat = {
+  isConnected: boolean
+}
+
+export const Chat: React.FC<TChat> = ({ isConnected }) => {
   return (
     <>
-      <Messages />
-      <Rooms />
+      <Rooms isConnected={isConnected} />
+      <div className={styles.wrapper}>
+        <Messages />
+        <SendMessage />
+      </div>
     </>
   )
 }

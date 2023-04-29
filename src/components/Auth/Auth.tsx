@@ -23,6 +23,7 @@ export const Auth = () => {
             if ('data' in response) {
                 localStorage.setItem('token-access', response.data.access_token);
                 localStorage.setItem('token-refresh', response.data.refresh_token);
+                localStorage.setItem('user', response.data.login);
                 dispatch(changeAuth())
                 handleClear()
             }

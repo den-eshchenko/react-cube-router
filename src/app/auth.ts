@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  isAuth: false
+  isAuth: false,
+  login: null,
 }
 
 export const authSlice = createSlice({
@@ -11,7 +12,10 @@ export const authSlice = createSlice({
     changeAuth: (state) => {
       state.isAuth = !state.isAuth
     },
+    changeLogin: (state, actions) => {
+      state.login = actions.payload
+    }
   },
 })
 
-export const { changeAuth } = authSlice.actions
+export const { changeAuth, changeLogin } = authSlice.actions

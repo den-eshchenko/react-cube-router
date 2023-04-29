@@ -1,6 +1,7 @@
 export type ResponseAuth = {
   access_token: string;
   refresh_token: string;
+  login: string;
 };
 export type RequestAuth = {
   login: string;

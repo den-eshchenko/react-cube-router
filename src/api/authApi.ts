@@ -17,10 +17,16 @@ export const authApi = commonApi.injectEndpoints({
           body,
         }),
       }),
+      check: builder.query<{ login: string }, void>({
+        query: () => ({ 
+          url: 'auth/check',
+          method: 'GET',
+         })
+      })
     }),
   });
 
-export const { useAuthMutation, useRegistrationMutation } = authApi;
+export const { useAuthMutation, useRegistrationMutation, useLazyCheckQuery } = authApi;
 
 // export const messageApi = commonApi.injectEndpoints({
 //   endpoints: (build) => ({

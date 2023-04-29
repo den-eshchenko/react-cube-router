@@ -27,7 +27,7 @@ export const executeQueryWrapper: BaseQueryFn<string | FetchArgs, unknown, Fetch
   if (result.error && result.error.status === 401 && !isAuthorizationEndpoint) {
     const refreshResult = await baseQuery(
       {
-        url: 'auth/refresh-accessToken',
+        url: 'auth/refresh-token',
         method: 'POST',
         body: { refresh_token: localStorage.getItem('token-refresh') }
       },
