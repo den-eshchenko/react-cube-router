@@ -1,5 +1,11 @@
 import { io } from 'socket.io-client';
 
-export const socket = io('http://localhost:3003', {
-  autoConnect: false
-});
+let socket: ReturnType<typeof io> | null = null
+
+export const getSocket = () => {
+  if (!socket) {
+    socket = io('http://localhost:3003');
+  }
+
+  return socket
+}

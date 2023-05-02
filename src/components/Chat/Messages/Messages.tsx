@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import { UserOutlined } from '@ant-design/icons'
 import { Avatar, List } from 'antd'
 import VirtualList from 'rc-virtual-list'
-import { useState } from 'react';
 import styles from './Messages.module.css'
 
 interface Message {
@@ -10,7 +10,7 @@ interface Message {
 }
 
 const messages = Array.from(Array(10).keys()).map((_, i) => ({ user: 'Ivan' + i, message: 'New message' + i }))
-const ContainerHeight = window.innerHeight - 100;
+const ContainerHeight = window.innerHeight - 120;
 
 export const Messages = () => {
   const [data] = useState<Message[]>(messages);

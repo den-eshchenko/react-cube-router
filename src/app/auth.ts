@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+export type TAuthSlice = {
+  isAuth: boolean
+  login: string | null
+}
+
+const initialState: TAuthSlice = {
   isAuth: false,
   login: null,
 }

@@ -4,13 +4,15 @@ import { Avatar, Badge,  } from 'antd'
 import { AddRoom } from './AddRoom/AddRoom'
 import { useAppSelector } from '../../../app/store'
 import styles from './Rooms.module.css'
+import { Socket } from 'socket.io-client'
+import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 
 type TRooms = {
   isConnected: boolean
 }
 
 export const Rooms: React.FC<TRooms> = ({ isConnected }) => {
-  const user = useAppSelector((state) => state.auth.login)
+  const userLogin = useAppSelector((state) => state.auth.login)
   const [isOpen, setIsOpen] = useState(false);
 
   const handleAddRoom = () => {
@@ -30,7 +32,7 @@ export const Rooms: React.FC<TRooms> = ({ isConnected }) => {
               <Avatar size="large" icon={<UserOutlined />} />
             </Badge>
           </div>
-          <div>{user}</div>
+          <div>{userLogin}</div>
         </div>
         {/* <div className={styles.iconWithTitle}>
           <div><Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} /></div>
