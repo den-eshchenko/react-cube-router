@@ -1,0 +1,19 @@
+.iconWithTitle {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px 0 0 10px;
+}
+
+.iconWithTitle:hover {
+  background-color: rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+
+.iconWithTitle div:nth-child(1) {
+  margin-right: 5px;
+}
+
+.active {
+  background-color: rgba(34, 60, 80, 0.2);
+}

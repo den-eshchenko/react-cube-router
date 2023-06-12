@@ -3,7 +3,7 @@ import { Avatar, Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useAuthMutation } from "../../api/authApi";
-import { changeAuth } from "../../app/auth";
+import { changeAuth, changeLogin } from "../../app/auth";
 import styles from './Auth.module.css'
 
 export const Auth = () => {
@@ -24,6 +24,7 @@ export const Auth = () => {
                 localStorage.setItem('token-access', response.data.access_token);
                 localStorage.setItem('token-refresh', response.data.refresh_token);
                 localStorage.setItem('user', response.data.login);
+                dispatch(changeLogin(response.data.login))
                 dispatch(changeAuth())
                 handleClear()
             }

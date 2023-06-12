@@ -4,7 +4,7 @@ let socket: ReturnType<typeof io> | null = null
 
 export const getSocket = () => {
   if (!socket) {
-    socket = io('http://localhost:3003');
+    socket = io('http://localhost:3003', { autoConnect: false });
   }
 
   return socket

@@ -1,16 +1,14 @@
 import { SendOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Space } from 'antd'
-import { Socket } from 'socket.io-client'
-import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import { getSocket } from '../../../api/socket'
 import { useAppSelector } from '../../../app/store'
 import styles from './SendMessage.module.css'
 
 type TSendMessage = {
-  roomName: string
+  activeRoom: string
 }
 
-export const SendMessage: React.FC<TSendMessage> = ({ roomName }) => {
+export const SendMessage: React.FC<TSendMessage> = ({ activeRoom }) => {
   const userLogin = useAppSelector((state) => state.auth.login);
   const [form] = Form.useForm()
   const socket = getSocket()
@@ -19,7 +17,7 @@ export const SendMessage: React.FC<TSendMessage> = ({ roomName }) => {
     try {
       const values = await form.validateFields()
       
-      socket?.emit?.('rooms/message', { message: values.message, userLogin, roomName })
+      socket?.emit?.('rooms/message', { message: values.message, userLogin, roomName: activeRoom })
     } catch (error) {
       console.error(error)
     }
@@ -29,8 +27,8 @@ export const SendMessage: React.FC<TSendMessage> = ({ roomName }) => {
     <div className={styles.wrapper}>
         <div className={styles.container}>
           <Form form={form}>
-            <Space.Compact style={{ width: '100%' }}>
-              <Form.Item name="message" >
+            <Space.Compact className={styles.sendMessageWrapper}>
+              <Form.Item name="message" className={styles.inputMessage} >
                 <Input size="large" placeholder="Enter message" prefix={<UserOutlined />} />
               </Form.Item>
               <Button

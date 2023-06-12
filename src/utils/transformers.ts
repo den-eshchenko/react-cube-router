@@ -1,8 +1,8 @@
-import { TMessage, TTransformedGetRoomDataResponse } from "../types/events";
+import { TRooms, TTransformedGetRoomDataResponse } from "../types/events";
 
-export const transformMessages = (roomName: string, messages: TMessage[]): TTransformedGetRoomDataResponse => {
+export const transformMessages = (rooms: TRooms): TTransformedGetRoomDataResponse => {
   return {
     isConnected: false,
-    messages: { [roomName]: messages }
+    rooms,
   }
 }

@@ -1,6 +1,6 @@
 import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { notification } from "antd";
-import { responseRefreshToken } from "../typeguards/responseRefreshToken";
+import { isResponseRefreshToken } from "../typeguards/isResponseRefreshToken";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3003/',
@@ -41,7 +41,7 @@ export const executeQueryWrapper: BaseQueryFn<string | FetchArgs, unknown, Fetch
       })
     }
 
-    if (refreshResult.data && responseRefreshToken(refreshResult.data)) {
+    if (refreshResult.data && isResponseRefreshToken(refreshResult.data)) {
       localStorage.setItem('token-access', refreshResult.data.access_token);
 
       result = await baseQuery(args, api, extraOptions)

@@ -1,53 +1,60 @@
-import { useState } from 'react'
-import { UserOutlined } from '@ant-design/icons'
-import { Avatar, List } from 'antd'
-import VirtualList from 'rc-virtual-list'
-import styles from './Messages.module.css'
+// import { useAppSelector } from '../../../app/store'
+import { TMessage } from "../../../types/events";
+import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
+import { Avatar } from "antd";
+import { useRef } from "react";
+import styles from "./Messages.module.css";
 
-interface Message {
-  user: string;
-  message: string
+type TProps = {
+  messages?: TMessage[]
 }
 
-const messages = Array.from(Array(10).keys()).map((_, i) => ({ user: 'Ivan' + i, message: 'New message' + i }))
-const ContainerHeight = window.innerHeight - 120;
+export const Messages: React.FC<TProps> = ({ messages = [] }) => {
+  const cache = useRef(new CellMeasurerCache({
+    fixedWidth: true,
+    defaultHeight: 100,
+  }));
+  // const userLogin = useAppSelector((state) => state.auth.login)
+  // const filteredMessages = messages.filter((message) => !(message.isJoin && message.userLogin === userLogin))
 
-export const Messages = () => {
-  const [data] = useState<Message[]>(messages);
-
-  // const onScroll = (e: React.UIEvent<HTMLElement, UIEvent>) => {
-  //   if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === ContainerHeight) {
-  //     appendData();
-  //   }
-  // };
-
+  
   
   return (
     <div className={styles.wrapper}>
-      <List>
-        <VirtualList
-          data={data}
-          height={ContainerHeight}
-          itemHeight={47}
-          itemKey="user"
-          // onScroll={onScroll}
-        >
-          {(item: Message) => (
-            <List.Item key={item.user}>
-              <List.Item.Meta
-                title={
-                  <div className={styles.title}>
-                    <Avatar size="large" icon={<UserOutlined />} />{item.user}
-                  </div>
-                }
-                description={
-                  <div className={styles.description}>{item.message}</div>
-                }
-              />
-            </List.Item>
-          )}
-        </VirtualList>
-      </List>
+      <AutoSizer>
+        {({ width, height }) => {
+          return (
+            <List
+              width={width}
+              height={height}
+              rowHeight={cache.current.rowHeight}
+              deferredMeasurementCache={cache.current}
+              rowCount={messages.length}
+              // onScroll={onScroll}
+              scrollToIndex={messages.length}
+              rowRenderer={({ key, index, parent, style }) => {
+                const item = messages[index];
+
+                return (
+                  <CellMeasurer key={key} cache={cache.current} parent={parent} columnIndex={0} rowIndex={index}>
+                    <div style={style}>
+                      <div className={styles.flexContainer}>
+                        {!item.isJoin && <Avatar style={{ marginRight: 5 }} />}
+                        <h2>
+                          {!item.isJoin && item.userLogin}
+                        </h2>
+                      </div>
+                      <div className={styles.message}>
+                        {!item.isJoin ? item.message : `${item.userLogin} ${item.message}`}
+                      </div>
+                    </div>
+                  </CellMeasurer>
+                );
+              }}
+            />
+          );
+        }}
+      </AutoSizer>
     </div>
-  )
-}
+  );
+};

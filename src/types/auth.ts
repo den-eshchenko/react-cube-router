@@ -1,6 +1,4 @@
-export type ResponseAuth = {
-  access_token: string;
-  refresh_token: string;
+export type ResponseAuth = Tokens & {
   login: string;
 };
 export type RequestAuth = {
@@ -8,14 +6,12 @@ export type RequestAuth = {
   password: string;
 };
 
-export interface Tokens {
+export type Tokens = {
   access_token: string;
   refresh_token: string;
 }
 
-export type ResponseRefreshToken = {
-  access_token: string;
-};
+export type ResponseRefreshToken = Pick<Tokens, 'access_token'>
 
 export type RequestRegistration = {
   login: string;

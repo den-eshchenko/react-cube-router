@@ -1,6 +1,6 @@
 .wrapper {
   flex: 1;
-  margin-top: 24px;
+  padding: 10px;
 }
 
 .sendButton {
@@ -8,5 +8,13 @@
 }
 
 .form {
+  width: 100%;
+}
+
+.sendMessageWrapper {
+  width: 100%;
+}
+
+.inputMessage {
   width: 100%;
 }
