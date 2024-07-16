@@ -28,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "playwright-test:dev": "NODE_ENV=development && npx playwright test",
+    "playwright-test:dev:win": "SET NODE_ENV=development && npx playwright test"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +51,9 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.1",
+    "@types/node": "^20.14.10",
+    "dotenv": "^16.4.5",
     "@types/react-dom": "^18.0.9",
     "@types/react-redux": "^7.1.24",
     "@types/react-virtualized": "^9.21.22"
